@@ -64,7 +64,8 @@ def test():
 		fake_password = fake_password.repeat(1,6,1)
 		diff = fake_password - real_password
 		diff = torch.sum(diff, dim= 2)
-		print ((diff == 0).nonzero())
+		inds = (diff == 0).nonzero()[1]
+		return gt[inds]
 
 
 test()
