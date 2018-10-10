@@ -30,9 +30,9 @@ def get_fake():
 				psd = gg[0]
 				usrname = gg[1]
 				if fake_password == psd:
-					
+					ggg.write(line + ',' + psd + ',' + usrname + '\n')
 					result.append(line + ',' + psd + ',' + usrname)
-					ggg.write(result)
+					
 			count += 1
 			line = _file.readline()
 		except:
