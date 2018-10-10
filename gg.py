@@ -27,6 +27,8 @@ def get_fake():
 			break
 		try:
 			line = line[:-1]
+			if len(line)>8:
+				continue
 			fake_password = crypt(line, '00')[2:]
 			for gg in real:
 				psd = gg[0]
@@ -34,12 +36,15 @@ def get_fake():
 				if fake_password == psd:
 					ggg.write(line + ',' + psd + ',' + usrname + '\n')
 					result.append(line + ',' + psd + ',' + usrname)
-			count += 1
+			
 			line = _file.readline()
 		except:
 			print ('====')
 			line = _file.readline()
+			count += 1
 			continue
+
+
 	print (result)
 get_fake()	
 # def multi_pool(index):
