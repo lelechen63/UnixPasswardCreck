@@ -41,7 +41,7 @@ def get_real():
 			num.append(ord(ch)) 
 		print(num)
 		real.append(num)
-
+	print (real)
 	real = np.asarray(real).astype(int)
 	real = torch.Tensor(real)
 	return real
