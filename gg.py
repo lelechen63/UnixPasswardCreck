@@ -22,7 +22,7 @@ def get_fake():
 	real =get_real()
 	result = []
 	while line:
-		if count % 100000 ==:
+		if count % 100000 == 0:
 			print (count)
 		try:
 			line = line[:-1]
