@@ -36,6 +36,7 @@ def get_fake():
 			count += 1
 			line = _file.readline()
 		except:
+			print ('====')
 			line = _file.readline()
 			continue
 	print (result)
