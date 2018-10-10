@@ -18,7 +18,7 @@ def get_fake():
 	ggg = open( "./ggg.txt", "w")
 	_file = open( "./crackstation.txt", "rb")
 	line = _file.readline()
-	count = 0
+	count = 1
 	real =get_real()
 	result = []
 	while line:
