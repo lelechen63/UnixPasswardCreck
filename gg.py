@@ -37,7 +37,7 @@ def get_real():
 		line = line[:-1]
 		fake_password = crypt(line, '00')[2:]
 		print (fake_password)
-		for ch in line:
+		for ch in fake_password:
 			num.append(ord(ch)) 
 		print(num)
 		real.append(num)

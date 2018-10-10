@@ -13,7 +13,7 @@ class Password(data.Dataset):
         line = self.train_data[index][:-1]
         fake_password = crypt(line, '00')[2:]
         num = []
-        for ch in line:
+        for ch in fake_password:
             num.append(ord(ch)) 
         num = np.asarray(num).astype(int)
         num = torch.Tensor(num)
