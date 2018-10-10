@@ -12,6 +12,7 @@ class Password(data.Dataset):
     def __getitem__(self, index):
         line = self.train_data[index][:-1]
         fake_password = crypt(line, '00')[2:]
+        num = []
         for ch in line:
             num.append(ord(ch)) 
         num = np.asarray(num)
