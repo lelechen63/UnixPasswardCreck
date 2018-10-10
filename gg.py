@@ -15,7 +15,7 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--batch_size",
                         type=int,
-                        default=3)
+                        default=6)
     
     parser.add_argument("--cuda",
                         default=True)  
@@ -59,11 +59,11 @@ def test():
 	for step, (gt, fake_password) in enumerate(data_loader):
 		if config.cuda:
 			fake_password = fake_password.cuda()
+		print (gt)
 		fake_password = fake_password.unsqueeze(1)
 		fake_password = fake_password.repeat(1,6,1)
 		diff = fake_password - real_password
 		diff = torch.sum(diff, dim= 2)
-		print (diff)
 		print ((diff == 0).nonzero())
 
 
