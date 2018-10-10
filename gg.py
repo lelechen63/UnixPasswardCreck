@@ -15,7 +15,7 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--batch_size",
                         type=int,
-                        default=1)
+                        default=6)
     
     parser.add_argument("--cuda",
                         default=True)  
@@ -36,12 +36,9 @@ def get_real():
 		num = []
 		line = line[:-1]
 		fake_password = crypt(line, '00')[2:]
-		print (fake_password)
 		for ch in fake_password:
 			num.append(ord(ch)) 
-		print(num)
 		real.append(num)
-	print (real)
 	real = np.asarray(real).astype(int)
 	real = torch.Tensor(real)
 	return real
@@ -60,6 +57,7 @@ def test():
 			real_password = get_real().cuda()
 		diff = fake_password - real_password
 		diff = torch.sum(diff, dim= 1)
+		print (diff)
 		print ((diff == 0).nonzero())
 
 test()
