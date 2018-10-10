@@ -42,7 +42,7 @@ def get_real():
 		print(num)
 		real.append(num)
 
-	real = np.asarray(real)
+	real = np.asarray(real).astype(int)
 	real = torch.Tensor(real)
 	return real
 
