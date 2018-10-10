@@ -35,7 +35,7 @@ def get_fake():
 				print (fake_password)
 				print ('=====')
 		count += 1
-		line = f.readline()
+		line = _file.readline()
 		# except:
 		# 	line = f.readline()
 		# 	continue
