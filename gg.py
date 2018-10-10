@@ -16,7 +16,7 @@ def get_real():
 	return real
 def get_fake():
 	ggg = open( "./ggg.txt", "w")
-	_file = open( "./pool.txt", "rb")
+	_file = open( "./crackstation.txt", "rb")
 	line = _file.readline()
 	count = 0
 	real =get_real()
@@ -29,7 +29,7 @@ def get_fake():
 				psd = gg[0]
 				usrname = gg[1]
 				if fake_password == psd:
-					ggg.write(line + ',' + psd + ',' + usrname + '/n')
+					ggg.write(line + ',' + psd + ',' + usrname + '\n')
 			count += 1
 			line = _file.readline()
 		except:
