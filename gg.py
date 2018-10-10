@@ -65,10 +65,11 @@ def test():
 		diff = fake_password - real_password
 		diff = torch.sum(diff, dim= 2)
 		inds = (diff == 0).nonzero()
-		if inds != []:
-			print (gt[inds[0][0]])
-
 		print (inds)
+		# if inds != []:
+		# 	print (gt[inds[0][0]])
+
+		
 		# return gt[inds]
 
 
