@@ -16,29 +16,29 @@ def get_real():
 	return real
 def get_fake():
 	ggg = open( "./ggg.txt", "w")
-	_file = open( "./crackstation.txt", "rb")
+	_file = open( "./pool.txt", "rb")
 	line = _file.readline()
 	count = 0
 	real =get_real()
 	while line:
 		print (count)
-		# try:
-		line = line[:-1]
-		fake_password = crypt(line, '00')[2:]
-		for gg in real:
-			psd = gg[0]
-			usrname = gg[1]
-			if fake_password == psd:
-				ggg.write(line + ',' + psd + ',' + usrname + '/n')
-			else:
-				print (line + ',' + psd + ',' + usrname + '/n')
-				print (fake_password)
-				print ('=====')
-		count += 1
-		line = _file.readline()
-		# except:
-		# 	line = f.readline()
-		# 	continue
+		try:
+			line = line[:-1]
+			fake_password = crypt(line, '00')[2:]
+			for gg in real:
+				psd = gg[0]
+				usrname = gg[1]
+				if fake_password == psd:
+					ggg.write(line + ',' + psd + ',' + usrname + '/n')
+				else:
+					print (line + ',' + psd + ',' + usrname + '/n')
+					print (fake_password)
+					print ('=====')
+			count += 1
+			line = _file.readline()
+		except:
+			line = f.readline()
+			continue
 get_fake()	
 # def multi_pool(index):
 # 	real =get_real()
