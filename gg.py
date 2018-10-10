@@ -39,7 +39,6 @@ def get_fake():
 			line = _file.readline()
 			continue
 	print (result)
-	ggg.write(line + ',' + psd + ',' + usrname + '\n')
 get_fake()	
 # def multi_pool(index):
 # 	real =get_real()
