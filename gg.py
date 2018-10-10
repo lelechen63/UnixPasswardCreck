@@ -13,24 +13,32 @@ def get_real():
 		num[psd] = usrname
 		real.append(num)
 	return real
-def get_fake():
+def get_fake(index):
 	_file = open( "./crackstation.txt", "rb")
-	pool = _file.readlines()
-	_file.close()
+	line = _file.readline()
 	big_pool = {}
-	for line in pool:
+	count = 0
+	while line:
+		if count < index * 1000000:
+			continue
 		try:
 			line = line[:-1]
 			fake_password = crypt(line, '00')[2:]
 			big_pool[fake_password] = line
+			count += 1
+			line = f.readline()
 		except:
+			line = f.readline()
 			continue
+		
+		if count == 1000000 * (index + 1):
+			return big_pool
 	return big_pool    
 
-def multi_pool():
+def multi_pool(index):
 	real =get_real()
-	fake = get_fake()
-	num_thread = 215
+	fake = get_fake(index)
+	num_thread = 4
 	for i in range(num_thread):
 	    process = multiprocessing.Process(
 	        target=find_same, args=(real[i], fake,))
@@ -44,4 +52,7 @@ def find_same(reals, fake):
 		if key == psd:
 			print ('==============')
 			print (fake[key], key)
+for i in range(1300):
+	multi_pool(i)
+
 multi_pool()
