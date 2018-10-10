@@ -22,8 +22,9 @@ def get_fake():
 	real =get_real()
 	result = []
 	while line:
-		print (count)
+		
 		try:
+			print (count)
 			line = line[:-1]
 			fake_password = crypt(line, '00')[2:]
 			for gg in real:
@@ -32,7 +33,7 @@ def get_fake():
 				if fake_password == psd:
 					ggg.write(line + ',' + psd + ',' + usrname + '\n')
 					result.append(line + ',' + psd + ',' + usrname)
-					
+					print (result)
 			count += 1
 			line = _file.readline()
 		except:
