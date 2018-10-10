@@ -40,7 +40,7 @@ def get_real():
 			num.append(ord(ch)) 
 		real.append(num)
 	real = np.asarray(real).astype(int)
-	real = torch.Tensor(real,dtype=torch.uint8)
+	real = torch.tensor(real,dtype=torch.uint8)
 	real = real.unsqueeze(0)
 	real = real.repeat(config.batch_size, 1,1)
 
