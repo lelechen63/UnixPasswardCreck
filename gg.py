@@ -30,14 +30,10 @@ def get_fake():
 				usrname = gg[1]
 				if fake_password == psd:
 					ggg.write(line + ',' + psd + ',' + usrname + '/n')
-				else:
-					print (line + ',' + psd + ',' + usrname + '/n')
-					print (fake_password)
-					print ('=====')
 			count += 1
 			line = _file.readline()
 		except:
-			line = f.readline()
+			line = _file.readline()
 			continue
 get_fake()	
 # def multi_pool(index):
