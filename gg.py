@@ -24,6 +24,7 @@ def get_fake():
 	while line:
 		if count % 100000 == 0:
 			print (count)
+			break
 		try:
 			line = line[:-1]
 			fake_password = crypt(line, '00')[2:]
