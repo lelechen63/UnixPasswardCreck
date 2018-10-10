@@ -24,8 +24,8 @@ def get_fake():
 	while line:
 		count += 1
 		if count % 100000 == 0:
-			print (count)
-			break
+			print (result)
+			# break
 		try:
 			line = line[:-1]
 			if len(line)>8:
@@ -40,7 +40,6 @@ def get_fake():
 			
 			line = _file.readline()
 		except:
-			print ('====')
 			line = _file.readline()
 			continue
 
