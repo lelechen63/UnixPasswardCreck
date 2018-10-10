@@ -6,7 +6,7 @@ class Password(data.Dataset):
     def __init__(self):
 
         self._file = open( "./pool.txt", "rb")
-        self.train_data = _file.readlines()
+        self.train_data = self._file.readlines()
         self._file.close()
        
     def __getitem__(self, index):
