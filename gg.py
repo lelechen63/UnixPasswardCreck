@@ -38,6 +38,7 @@ def get_fake():
 		except:
 			line = _file.readline()
 			continue
+	print (result)
 get_fake()	
 # def multi_pool(index):
 # 	real =get_real()
