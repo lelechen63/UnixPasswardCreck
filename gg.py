@@ -15,7 +15,7 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--batch_size",
                         type=int,
-                        default=10)
+                        default=3)
     
     parser.add_argument("--cuda",
                         default=True)  
@@ -42,7 +42,7 @@ def get_real():
 	real = np.asarray(real).astype(int)
 	real = torch.Tensor(real)
 	real = real.unsqueeze(0)
-	real = real.repeat(10, 1,1)
+	real = real.repeat(config.batch_size, 1,1)
 
 	return real
 
