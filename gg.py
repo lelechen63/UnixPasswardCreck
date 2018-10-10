@@ -15,7 +15,7 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--batch_size",
                         type=int,
-                        default=6)
+                        default=10)
     
     parser.add_argument("--cuda",
                         default=True)  
@@ -41,10 +41,15 @@ def get_real():
 		real.append(num)
 	real = np.asarray(real).astype(int)
 	real = torch.Tensor(real)
+	real = real.unsqueeze(0)
+	real = real.repeat(10, 1,1)
+
 	return real
 
 def test():
+	file = open("./gt.txt",'w') 
 	os.environ["CUDA_VISIBLE_DEVICES"] = config.device_ids
+	real_password = get_real().cuda()
 	dataset =  Password()
 	data_loader = DataLoader(dataset,
 	                                  batch_size=config.batch_size,
@@ -54,10 +59,12 @@ def test():
 	for step, (gt, fake_password) in enumerate(data_loader):
 		if config.cuda:
 			fake_password = fake_password.cuda()
-			real_password = get_real().cuda()
+		fake_password = fake_password.unsqueeze(1)
+		fake_password = fake_password.repeat(1,6,1)
 		diff = fake_password - real_password
-		diff = torch.sum(diff, dim= 1)
+		diff = torch.sum(diff, dim= 2)
 		print (diff)
 		print ((diff == 0).nonzero())
+
 
 test()
