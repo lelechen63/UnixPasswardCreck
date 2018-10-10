@@ -19,9 +19,12 @@ def get_fake():
 	_file.close()
 	big_pool = {}
 	for line in pool:
-		line = line[:-1]
-		fake_password = crypt(line, '00')[2:]
-		big_pool[fake_password] = line
+		try:
+			line = line[:-1]
+			fake_password = crypt(line, '00')[2:]
+			big_pool[fake_password] = line
+		except:
+			continue
 	return big_pool    
 
 def multi_pool():
