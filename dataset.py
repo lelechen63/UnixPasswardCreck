@@ -17,7 +17,7 @@ class Password(data.Dataset):
             num.append(ord(ch)) 
         num = np.asarray(num)
         num = torch.Tensor(num)
-        return num 
+        return line, num 
     def __len__(self):
         return len(self.train_data)
        
