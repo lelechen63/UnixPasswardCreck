@@ -22,6 +22,7 @@ def get_fake():
 	real =get_real()
 	result = []
 	while line:
+		count += 1
 		if count % 100000 == 0:
 			print (count)
 			break
@@ -41,7 +42,6 @@ def get_fake():
 		except:
 			print ('====')
 			line = _file.readline()
-			count += 1
 			continue
 
 
