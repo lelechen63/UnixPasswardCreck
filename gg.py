@@ -40,7 +40,7 @@ def get_real():
 			num.append(ord(ch)) 
 		real.append(num)
 	real = np.asarray(real).astype(int)
-	real = torch.Tensor(real)
+	real = torch.Tensor(real,dtype=torch.uint8)
 	real = real.unsqueeze(0)
 	real = real.repeat(config.batch_size, 1,1)
 
@@ -65,6 +65,9 @@ def test():
 		diff = fake_password - real_password
 		diff = torch.sum(diff, dim= 2)
 		inds = (diff == 0).nonzero()
+		if inds != []:
+			print (gt[inds[0][0]])
+
 		print (inds)
 		# return gt[inds]
 

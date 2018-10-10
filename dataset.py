@@ -16,7 +16,7 @@ class Password(data.Dataset):
         for ch in fake_password:
             num.append(ord(ch)) 
         num = np.asarray(num).astype(int)
-        num = torch.Tensor(num)
+        num = torch.Tensor(num,dtype=torch.uint8)
         return line, num 
     def __len__(self):
         return len(self.train_data)
