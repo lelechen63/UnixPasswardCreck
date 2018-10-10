@@ -1,6 +1,6 @@
 import torch.utils.data as data
 from crypt import crypt
-import numpy
+import numpy as np
 import torch
 class Password(data.Dataset):
     def __init__(self):
