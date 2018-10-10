@@ -1,76 +1,44 @@
 from crypt import crypt
-# import torch
-from dataset import Password
-import argparse
-import os
-import glob
-import time
-import torch
-from torch.utils.data import DataLoader
-import numpy as np
-from collections import OrderedDict
-import argparse
-
-def parse_args():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--batch_size",
-                        type=int,
-                        default=6)
-    
-    parser.add_argument("--cuda",
-                        default=True)  
-    parser.add_argument('--device_ids', type=str, default='3')
-    parser.add_argument('--num_thread', type=int, default=1)
-    # parser.add_argument('--flownet_pth', type=str, help='path of flownets model')
-
-    return parser.parse_args()
-config = parse_args()
+import multiprocessing
 
 def get_real():
-	_file = open( "./password.txt", "rb")
+	_file = open( "./password17_cipher.txt", "rb")
 	train_data = _file.readlines()
 	_file.close()
 	real = []
-
 	for line in train_data:
-		num = []
+		num = {}
+		usrname, psd  = line.split()
+		psd = psd[2:]
+		num[psd] = usrname
+		real.append(num)
+	return real
+def get_fake():
+	_file = open( "./crackstation.txt", "rb")
+	pool = _file.readlines()
+	_file.close()
+	big_pool = {}
+	for line in pool:
 		line = line[:-1]
 		fake_password = crypt(line, '00')[2:]
-		for ch in fake_password:
-			num.append(ord(ch)) 
-		real.append(num)
-	real = np.asarray(real).astype(int)
-	real = torch.tensor(real,dtype=torch.uint8)
-	real = real.unsqueeze(0)
-	real = real.repeat(config.batch_size, 1,1)
+		big_pool[fake_password] = line
+	return big_pool    
 
-	return real
+def multi_pool():
+	real =get_real()
+	fake = get_fake()
+	num_thread = 215
+	for i in range(num_thread):
+	    process = multiprocessing.Process(
+	        target=find_same, args=(real[i], fake,))
+	    process.start()
 
-def test():
-	file = open("./gt.txt",'w') 
-	os.environ["CUDA_VISIBLE_DEVICES"] = config.device_ids
-	real_password = get_real().cuda()
-	dataset =  Password()
-	data_loader = DataLoader(dataset,
-	                                  batch_size=config.batch_size,
-	                                  num_workers= config.num_thread,
-	                                  shuffle=False, drop_last=True)
+
+def find_same(reals, fake):
+	psd = reals.keys()[0]
 	
-	for step, (gt, fake_password) in enumerate(data_loader):
-		if config.cuda:
-			fake_password = fake_password.cuda()
-		print (gt)
-		fake_password = fake_password.unsqueeze(1)
-		fake_password = fake_password.repeat(1,6,1)
-		diff = fake_password - real_password
-		diff = torch.sum(diff, dim= 2)
-		inds = (diff == 0).nonzero()
-		print (inds)
-		# if inds != []:
-		# 	print (gt[inds[0][0]])
-
-		
-		# return gt[inds]
-
-
-test()
+	for index, key in enumerate(fake) :
+		if key == psd:
+			print ('==============')
+			print (fake[key], key)
+multi_pool()
